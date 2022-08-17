@@ -35,6 +35,6 @@ const start = async () => {
   app.post("/add-expense", (req, res) => {
     expensesController.addExpense(req, res);
   });
-  app.get("/expenses", (req, res) => {
+  app.get("/expenses/:id", (req, res) => {
     expensesController.getExpenses(req, res);
 });

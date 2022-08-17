@@ -14,14 +14,14 @@ const addExpense = (req, res) => {
   }
 
 const getExpenses = (req, res) => {
-  Expense.find().exec(function (err, expenses) {
+  Expense.find(function (err, expenses) {
     if (err) {
       console.log("error");
       return;
     }
+    console.log(req.params.id)
     res.json(expenses);
     // Prints "Space Ghost is a talk show host."
-    console.log(expenses);
   });
 }
 

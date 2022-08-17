@@ -4,14 +4,14 @@ import {UserContext} from '../UserContext'
 
 function AllExpenses() {
   const [expenses, setExpenses] = useState([]);
-  const txt = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BACKEND_URL + '/expenses').then(response => {
-      console.log(response);
-    })
+    axios.get(process.env.REACT_APP_BACKEND_URL + '/expenses/' + user.id)
+    .then(response => response.data)
+    .then(expenses => console.log(expenses[0].title));
   })
   return (
-    <div>{txt}</div>
+    <div>{user.id} njnj</div>
   )
 }
 
