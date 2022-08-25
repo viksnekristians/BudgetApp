@@ -14,14 +14,13 @@ const addExpense = (req, res) => {
   }
 
 const getExpenses = (req, res) => {
-  Expense.find(function (err, expenses) {
+  Expense.find({userID: req.params.id}, function (err, expenses) {
     if (err) {
       console.log("error");
       return;
     }
     console.log(req.params.id)
     res.json(expenses);
-    // Prints "Space Ghost is a talk show host."
   });
 }
 

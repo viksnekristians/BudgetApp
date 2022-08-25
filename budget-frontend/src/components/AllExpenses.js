@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios';
 import {UserContext} from '../UserContext'
+import { ExpensesContext } from '../ExpensesContext';
 
 function AllExpenses() {
-  const [expenses, setExpenses] = useState([]);
+  const {expenses, setExpenses} = useContext(ExpensesContext);
   const {user, setUser} = useContext(UserContext);
-  useEffect(() => {
-    axios.get(process.env.REACT_APP_BACKEND_URL + '/expenses/' + user.id)
-    .then(response => response.data)
-    .then(expenses => console.log(expenses[0].title));
-  })
   return (
-    <div>{user.id} njnj</div>
+    <div>{expenses.map(ex =><p>{ex.title}</p>)}
+    <button onClick={() => {
+     setUser({id: "new"})
+    }}>Click</button>
+    </div>
   )
 }
 

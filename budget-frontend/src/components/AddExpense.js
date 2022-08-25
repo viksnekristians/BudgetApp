@@ -38,10 +38,10 @@ function AddExpense() {
         userID: "123456"
       })
       })
-      /*.then((response) => response.json())
+      .then((response) => response.json())
       .then((result) => {
         console.log(result)
-      })*/
+      })
   }
 
   return (
