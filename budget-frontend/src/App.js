@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import './App.css';
 import Login from './components/Login'
 import AddExpense from './components/AddExpense'
 import AllExpenses from './components/AllExpenses'

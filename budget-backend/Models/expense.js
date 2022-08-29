@@ -21,6 +21,15 @@ const ExpenseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  createdAt: {
+    type:Date,
+    immutable: true,
+    default: () => Date.now()
+  },
+  updatedAt: {
+    type:Date,
+    default: () => Date.now()
+  }
 });
 
 const Expense = mongoose.model("Expense", ExpenseSchema);

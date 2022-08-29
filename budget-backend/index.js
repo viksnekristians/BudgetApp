@@ -37,4 +37,7 @@ const start = async () => {
   });
   app.get("/expenses/:id", (req, res) => {
     expensesController.getExpenses(req, res);
-});
+  });
+  app.delete("/delete-expense/:id", (req, res) => {
+    expensesController.deleteExpense(req, res);
+  });

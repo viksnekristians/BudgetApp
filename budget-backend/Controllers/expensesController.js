@@ -20,9 +20,18 @@ const getExpenses = (req, res) => {
       return;
     }
     console.log(req.params.id)
+    console.log(expenses)
     res.json(expenses);
   });
 }
 
+const deleteExpense = (req, res) => {
+  Expense.deleteOne({ _id: req.params.id }, function (err) {
+    if (err) console.log("error deleting")
+    // deleted at most one tank document
+  });
+  }
+
  exports.addExpense = addExpense;
  exports.getExpenses = getExpenses;
+ exports.deleteExpense = deleteExpense;

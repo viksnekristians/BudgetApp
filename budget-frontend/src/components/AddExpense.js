@@ -1,11 +1,15 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { UserContext } from '../UserContext';
+import { ExpensesContext } from '../ExpensesContext';
 
 function AddExpense() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState(0);
-  const [userID, setUserID] = useState("");
+  
+  const {user, setUser} = useContext(UserContext)
+  const {expenses, setExpenses} = useContext(ExpensesContext)
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value)
@@ -39,23 +43,38 @@ function AddExpense() {
       })
       })
       .then((response) => response.json())
-      .then((result) => {
-        console.log(result)
+      .then((expense) => {
+        console.log(expense)
+        setExpenses([...expenses, expense])
       })
+
+     setTitle("");
+     setDescription("");
+     setCategory("");
+     setAmount(0);
   }
 
   return (
-    <form onSubmit={addNewExpense} action="http://localhost:3000/add-expense" method="get">
-      <label for="title"><b>Title</b></label>
-      <input type="text" placeholder="Title" name="title" required onChange={handleTitleChange}></input>
-      <label for="category"><b>Category</b></label>
-      <input type="text" placeholder="Category" name="category" onChange={handleCategoryChange}></input>
-      <label for="desc"><b>Description</b></label>
-      <textarea placeholder="Description" name="desc" required onChange={handleDescriptionChange}></textarea>
-      <label for="title"><b>Amount</b></label>
-      <input type="number" name="amount" required onChange={handleAmountChange}></input>
-      <button>Add expense</button>
+    <form className='add-expense-form p-3' onSubmit={addNewExpense} action="http://localhost:3000/add-expense" method="get" >
+      <div class="mb-3">
+        <label for="title" class="form-label text-white"><b>Title</b></label>
+        <input type="text" class="form-control" placeholder="Title" name="title" value={title} required onChange={handleTitleChange}></input>
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label text-white"><b>Category</b></label>
+        <input type="text" class="form-control" placeholder="Category" name="category" value={category} onChange={handleCategoryChange}></input>
+      </div>
+      <div class="mb-3">
+        <label for="desc" class="form-label text-white"><b>Description</b></label>
+        <textarea placeholder="Description" name="desc" class="form-control" value={description} required onChange={handleDescriptionChange}></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="amount" class="form-label text-white"><b>Amount</b></label>
+        <input type="number" step="0.01" name="amount" class="form-control" value={amount} required onChange={handleAmountChange}></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Add expense</button>
    </form>
+   
   )
 }
 
