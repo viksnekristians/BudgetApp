@@ -35,7 +35,7 @@ function Expense(props) {
           </div>
           <p class="card-text">{props.expense.description}</p>
           <p class="card-text" style={{color: props.categoryIdx < colors.length ? colors[props.categoryIdx] : colors[props.categoryIdx % colors.length]}}><b>{props.expense.category}</b></p>
-          <p class="card-text"><span style={{fontSize: "24px"}}><b>{props.expense.amount} €</b></span></p>
+          <p class="card-text"><span style={{fontSize: "24px"}}><b>{Number(props.expense.amount).toFixed(2)} €</b></span></p>
 
         </div>
     </div>

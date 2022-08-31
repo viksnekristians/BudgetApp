@@ -6,6 +6,7 @@ var cors = require('cors');
 const app = express();
 
 const expensesController = require("./Controllers/expensesController");
+const userController = require("./Controllers/userController");
 
 const PORT = process.env.PORT;
 
@@ -40,4 +41,7 @@ const start = async () => {
   });
   app.delete("/delete-expense/:id", (req, res) => {
     expensesController.deleteExpense(req, res);
+  });
+  app.post("/login", (req, res) => {
+    userController.login(req, res);
   });

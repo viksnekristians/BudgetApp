@@ -33,9 +33,9 @@ function Home() {
   return (
     <div className="container-sm pt-4">
       <h3>Hello, {user.firstName} {user.lastName}</h3>
-      <p>Your expenses last 7 days: <span style={{fontSize: "24px"}}><b>{getExpensesInPeriod(7)} €</b></span></p>
-      <p>Your expenses this calendar month: <span style={{fontSize: "24px"}}><b>{getExpensesThisMonth()} €</b></span></p>
-      <p>Your expenses last 30 days: <span style={{fontSize: "24px"}}><b>{getExpensesInPeriod(30)} €</b></span></p>
+      <p>Your expenses last 7 days: <span style={{fontSize: "24px"}}><b>{getExpensesInPeriod(7).toFixed(2)} €</b></span></p>
+      <p>Your expenses this calendar month: <span style={{fontSize: "24px"}}><b>{getExpensesThisMonth().toFixed(2)} €</b></span></p>
+      <p>Your expenses last 30 days: <span style={{fontSize: "24px"}}><b>{getExpensesInPeriod(30).toFixed(2)} €</b></span></p>
     </div>
   );
 }

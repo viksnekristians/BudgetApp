@@ -39,7 +39,7 @@ function AddExpense() {
         category: category, 
         desc: description,
         amount: amount,
-        userID: "123456"
+        userID: user.id
       })
       })
       .then((response) => response.json())

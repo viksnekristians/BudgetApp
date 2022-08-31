@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react';
 import {Link} from 'react-router-dom'
 import AddExpense from './AddExpense'
+import { UserContext } from '../UserContext';
 
 function Nav() {
-
+  const {user, setUser} = useContext(UserContext)
   const [showAddExpense, setShowAddExpense] = useState(false);
+  const handleLogout = (e) => {
+    e.preventDefault();
+    sessionStorage.clear();
+    setUser(null);
+  }
  
   return (
     <div className="bg-dark ">
@@ -29,6 +35,7 @@ function Nav() {
             }
           </li>
         </ul> 
+        <div style={{marginLeft: "auto"}}>{user && <button className="btn btn-danger" onClick={handleLogout}>Log out</button>}</div>
       </div>
     </nav>
   </div>
