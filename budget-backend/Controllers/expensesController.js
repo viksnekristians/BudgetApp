@@ -21,7 +21,7 @@ const getExpenses = (req, res) => {
     console.log(req.params.id)
     console.log(expenses)
     res.json(expenses);
-  });
+  }).sort({createdAt: 'desc'});
 }
 
 const deleteExpense = (req, res) => {
