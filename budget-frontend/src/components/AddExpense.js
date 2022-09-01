@@ -38,7 +38,7 @@ function AddExpense() {
         title: title,
         category: category, 
         desc: description,
-        amount: amount,
+        amount: Number(amount),
         userID: user.id
       })
       })

@@ -10,6 +10,7 @@ import Expenses from './pages/Expenses';
 import Home from './pages/Home';
 import Nav from './components/Nav';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 const ProtectedRoute = ({ user, children }) => {
   if (!user) {
@@ -47,8 +48,8 @@ function App() {
         <ExpensesContext.Provider value={{expenses, setExpenses}}>
           <Nav></Nav>
           <Routes>
-          <Route path='/login' element={<Login />}>
-            </Route>
+            <Route path='/login' element={<Login />}></Route>
+            <Route path='/register' element={<Register />}></Route>
             <Route path='/' element={
               <ProtectedRoute user={user}>
                 <Home />

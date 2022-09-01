@@ -45,3 +45,6 @@ const start = async () => {
   app.post("/login", (req, res) => {
     userController.login(req, res);
   });
+  app.post("/register", (req, res) => {
+    userController.register(req, res);
+  });

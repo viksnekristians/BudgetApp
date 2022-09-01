@@ -16,7 +16,7 @@ function Nav() {
   return (
     <div className="bg-dark ">
       <nav class="navbar navbar-expand-lg navbar-dark container-sm">
-      <a class="navbar-brand px-2" href="#">Budget App</a>
+      <a class="navbar-brand px-2" href="/">Budget App</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -29,7 +29,7 @@ function Nav() {
           <Link to='/expenses' className='nav-link'>Expenses</Link>
           </li>
           <li style={{position: "relative"}}>
-            <button className={!showAddExpense ? "btn btn-success" : "btn btn-danger"} onClick={() => {setShowAddExpense(!showAddExpense)}}>Add expense</button>
+            <button className={!showAddExpense ? "btn btn-success" : "btn btn-danger"} onClick={() => {setShowAddExpense(!showAddExpense)}}>{!showAddExpense ? "Add expense" : "Close"}</button>
             {showAddExpense &&
              <AddExpense></AddExpense>
             }

@@ -27,7 +27,7 @@ function Expense(props) {
 
 
   return (
-    <div class="card w-50 mb-2 mx-auto">
+    <div class="card w-50 mb-2 mx-auto w-100-tablet">
         <div class="card-body">
           <div class="d-flex flex-row justify-content-between">
             <h5 class="card-title">{props.expense.title}</h5>
