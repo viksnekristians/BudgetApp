@@ -33,7 +33,7 @@ function Home() {
 
   return (
     <div className="container-sm pt-4">
-      <h3>Hello, {user.firstname} {user.lastname}</h3>
+      <h3 className="mb-2"><b>Hello, {user.firstname} {user.lastname}</b></h3>
       <p>Your expenses last 7 days: <span style={{fontSize: "24px"}}><b>{getExpensesInPeriod(7).toFixed(2)} €</b></span></p>
       <p>Your expenses this calendar month: <span style={{fontSize: "24px"}}><b>{getExpensesThisMonth().toFixed(2)} €</b></span></p>
       <p>Your expenses last 30 days: <span style={{fontSize: "24px"}}><b>{getExpensesInPeriod(30).toFixed(2)} €</b></span></p>
