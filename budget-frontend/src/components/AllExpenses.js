@@ -12,10 +12,10 @@ function AllExpenses() {
   return (
     <div className="container-sm pt-4">
       <div class="dropdown show w-50 mx-auto">
-        <a class="btn btn-blue dropdown-toggle mb-2" onClick={() => setDropdownVisible(!dropdownVisible)}>
+        <a id="dropdown-toggle" class="btn btn-blue dropdown-toggle mb-2" onClick={() => setDropdownVisible(!dropdownVisible)}>
          {currentCategory}
         </a>
-        <div class="dropdown-menu w-100" style={{display: dropdownVisible ? "block" : "none"}}>
+        <div id="dropdown-menu" class="dropdown-menu w-100" style={{display: dropdownVisible ? "block" : "none"}}>
           <a class="dropdown-item w-100" onClick={(e) => setCurrentCategory(e.target.innerText)}>See All</a>
           {categories.map(c => <a class="dropdown-item" onClick={(e) => setCurrentCategory(e.target.innerText)}>{c}</a>)}  
         </div>

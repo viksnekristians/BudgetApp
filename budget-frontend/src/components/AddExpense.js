@@ -55,7 +55,7 @@ function AddExpense() {
   }
 
   return (
-    <form className='add-expense-form p-3' onSubmit={addNewExpense} action="http://localhost:3000/add-expense" method="get" >
+    <form id="add-expense-form" className='add-expense-form p-3' onSubmit={addNewExpense} action="http://localhost:3000/add-expense" method="get" >
       <div class="mb-3">
         <label for="title" class="form-label text-white"><b>Title</b></label>
         <input type="text" class="form-control" placeholder="Title" name="title" value={title} required onChange={handleTitleChange}></input>

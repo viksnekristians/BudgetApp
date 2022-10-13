@@ -33,5 +33,30 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      document.addEventListener("click" ,  function(e) {
+        let expenseForm = document.getElementById("add-expense-form");
+        if (expenseForm !== null) {
+          if (!e.target.classList.contains("add-expense-form") && e.target.id !== "add-expense-btn" && !expenseForm.contains(e.target) ) {
+            let btn = document.getElementById("add-expense-btn");
+            if (btn.classList.contains("btn-danger")) {
+              btn.click();
+            }
+          }
+        }
+        
+        dropdownToggle = document.getElementById("dropdown-toggle");
+        dropdownMenu = document.getElementById("dropdown-menu");
+        if (dropdownMenu !== null) {
+          var style = window.getComputedStyle(dropdownMenu);
+          if (style.display !== 'none') {
+            if (e.target.id !== "dropdown-toggle") {
+              dropdownToggle.click();
+            }
+          }
+        }
+      }, true);
+      
+    </script>
   </body>
 </html>

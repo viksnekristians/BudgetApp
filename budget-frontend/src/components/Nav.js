@@ -29,7 +29,7 @@ function Nav() {
           <Link to='/expenses' className='nav-link'>Expenses</Link>
           </li>
           <li style={{position: "relative"}}>
-            <button className={!showAddExpense ? "btn btn-success" : "btn btn-danger"} onClick={() => {setShowAddExpense(!showAddExpense)}}>{!showAddExpense ? "Add expense" : "Close"}</button>
+            <button id="add-expense-btn" className={!showAddExpense ? "btn btn-success" : "btn btn-danger"} onClick={() => {setShowAddExpense(!showAddExpense)}}>{!showAddExpense ? "Add expense" : "Close"}</button>
             {showAddExpense &&
              <AddExpense></AddExpense>
             }
