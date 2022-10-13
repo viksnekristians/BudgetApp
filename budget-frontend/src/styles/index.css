@@ -43,6 +43,29 @@ button:focus {
   color:white !important;
 }
 
+.categories-container {
+  display:flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.category-btn {
+  background-color: white;
+  color:#06283D;
+  border-radius: 5px;
+  padding: 4px 8px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.category-btn:hover {
+  background-color: white;
+  color:#06283D;
+  text-decoration: none;
+}
+
 @media only screen and (max-width: 991px) {
   .w-100-tablet {
     min-width: 100% !important;
