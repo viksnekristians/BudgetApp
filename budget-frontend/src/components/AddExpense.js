@@ -7,9 +7,12 @@ function AddExpense() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState(0);
+  const [categoriesVisible, setCategoriesVisible] = useState(false)
   
   const {user, setUser} = useContext(UserContext)
   const {expenses, setExpenses} = useContext(ExpensesContext)
+
+  const categories = [...new Set(expenses.map(expense => expense.category))]
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value)
@@ -63,6 +66,15 @@ function AddExpense() {
       <div class="mb-3">
         <label for="category" class="form-label text-white"><b>Category</b></label>
         <input type="text" class="form-control" placeholder="Category" name="category" value={category} onChange={handleCategoryChange}></input>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" onClick={() => setCategoriesVisible(!categoriesVisible)}>
+          Or select from existing categories
+        </button>
+        <div class="category-dropdown-menu bg-white p-2" style={{display: categoriesVisible ? "block" : "none"}}>
+          {categories.map(c => <a class="dropdown-item" href="#" onClick={() => setCategory(c)}>{c}</a>)}
+        </div>
+        
       </div>
       <div class="mb-3">
         <label for="desc" class="form-label text-white"><b>Description</b></label>

@@ -1,6 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+
+
 
 function CategoryButton({text, onClick}) {
+
+  
+  useEffect( () => () => console.log({text}), [] );
   const [isActive, setIsActive] = useState(false)
   const handleClick = () => {
     onClick();

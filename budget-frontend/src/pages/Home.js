@@ -9,7 +9,6 @@ import {ExpensesContext} from '../ExpensesContext'
 function Home() {
   const {user, setUser} = useContext(UserContext)
   const {expenses, setExpenses} = useContext(ExpensesContext)
-  const categories = expenses.map(expense => expense.category)
 
   useEffect(() => console.log(expenses), [expenses])
 

@@ -66,6 +66,19 @@ button:focus {
   text-decoration: none;
 }
 
+.react-date-picker__clear-button.react-date-picker__button {
+  display: none;
+}
+.react-date-picker__wrapper {
+  background: white;
+}
+
+.select-date-text {
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
 @media only screen and (max-width: 991px) {
   .w-100-tablet {
     min-width: 100% !important;
