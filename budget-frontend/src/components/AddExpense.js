@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { UserContext } from '../UserContext';
 import { ExpensesContext } from '../ExpensesContext';
+import authAxios from '../api/authAxios';
 
 function AddExpense() {
   const [title, setTitle] = useState("");
@@ -22,6 +23,11 @@ function AddExpense() {
     setCategory(e.target.value)
   }
 
+  const handleCategoryClick = (c) => {
+    setCategory(c)
+    setCategoriesVisible(false)
+  }
+
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value)
   }
@@ -32,25 +38,25 @@ function AddExpense() {
 
   const addNewExpense = (e) => {
     e.preventDefault();
-      fetch('http://localhost:8000/add-expense', {
-      method: "POST",
+
+    /*const authAxios = axios.create({
+      baseURL: process.env.REACT_APP_BACKEND_URL,
       headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({
+          Authorization: authHeader()
+      }
+    });*/
+    authAxios.post(process.env.REACT_APP_BACKEND_URL + '/add-expense', {
         title: title,
         category: category, 
         desc: description,
         amount: Number(amount),
         userID: user.id
-      })
-      })
-      .then((response) => response.json())
-      .then((expense) => {
-        console.log(expense)
-        setExpenses([...expenses, expense])
-      })
-
+    })
+    .then(response => response.data)
+    .then((expense) => {
+      console.log(expense)
+      setExpenses([...expenses, expense])
+    })
      setTitle("");
      setDescription("");
      setCategory("");
@@ -67,14 +73,13 @@ function AddExpense() {
         <label for="category" class="form-label text-white"><b>Category</b></label>
         <input type="text" class="form-control" placeholder="Category" name="category" value={category} onChange={handleCategoryChange}></input>
       </div>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" onClick={() => setCategoriesVisible(!categoriesVisible)}>
-          Or select from existing categories
+      <div class="dropdown mb-3 position-relative">
+        <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton" onClick={() => setCategoriesVisible(!categoriesVisible)}>
+          Select from existing categories
         </button>
         <div class="category-dropdown-menu bg-white p-2" style={{display: categoriesVisible ? "block" : "none"}}>
-          {categories.map(c => <a class="dropdown-item" href="#" onClick={() => setCategory(c)}>{c}</a>)}
+          {categories.map(c => <a class="dropdown-item" href="#" onClick={() => handleCategoryClick(c)}>{c}</a>)}
         </div>
-        
       </div>
       <div class="mb-3">
         <label for="desc" class="form-label text-white"><b>Description</b></label>

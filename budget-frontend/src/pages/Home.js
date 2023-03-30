@@ -1,16 +1,12 @@
 
 import { useState, useContext, useEffect } from 'react';
-import Login from '../components/Login'
-import AddExpense from '../components/AddExpense'
-import AllExpenses from '../components/AllExpenses'
-import {UserContext} from '../UserContext'
-import {ExpensesContext} from '../ExpensesContext'
+import {UserContext} from '../UserContext';
+import {ExpensesContext} from '../ExpensesContext';
+import authHeader from '../services/authHeader';
 
 function Home() {
   const {user, setUser} = useContext(UserContext)
   const {expenses, setExpenses} = useContext(ExpensesContext)
-
-  useEffect(() => console.log(expenses), [expenses])
 
   function getExpensesThisMonth() {
     return expenses.reduce((total, expense) => {

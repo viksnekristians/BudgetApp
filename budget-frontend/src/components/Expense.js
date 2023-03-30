@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import {UserContext} from '../UserContext'
 import { ExpensesContext } from '../ExpensesContext';
 import CloseButton from 'react-bootstrap/CloseButton';
-import axios from 'axios';
+import authAxios from '../api/authAxios';
 
 function Expense(props) {
     const colors = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
@@ -17,7 +17,7 @@ function Expense(props) {
     '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
 
   const deleteExpense = () => {
-    axios.delete(process.env.REACT_APP_BACKEND_URL + '/delete-expense/' + props.expense._id)
+    authAxios.delete(process.env.REACT_APP_BACKEND_URL + '/delete-expense/' + props.expense._id)
     .then(() => console.log(expenses[3]._id , "  " , props.expense._id));
     setExpenses(expenses.filter(ex => ex._id !== props.expense._id))
   }

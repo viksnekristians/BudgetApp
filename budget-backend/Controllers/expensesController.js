@@ -9,6 +9,7 @@ const addExpense = (req, res) => {
       if (err) return console.log("error saving expense");
     });
     res.send(expense);
+    console.log(process.env.ACCESS_TOKEN_SECRET)
 
   }
 
@@ -18,10 +19,8 @@ const getExpenses = (req, res) => {
       console.log("error");
       return;
     }
-    console.log(req.params.id)
-    console.log(expenses)
     res.json(expenses);
-  }).sort({createdAt: 'desc'});
+  }).sort({createdAt: -1});
 }
 
 const deleteExpense = (req, res) => {

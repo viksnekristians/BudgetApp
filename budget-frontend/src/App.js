@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import authAxios from './api/authAxios';
 import AddExpense from './components/AddExpense'
 import AllExpenses from './components/AllExpenses'
 import {UserContext} from './UserContext'
@@ -21,21 +21,14 @@ const ProtectedRoute = ({ user, children }) => {
 };
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("userdata")))
   const [expenses, setExpenses] = useState([])
-  useEffect(() => {
-    if(sessionStorage.getItem("isLoggedIn") === "true" && sessionStorage.getItem("userdata")) {
-      setUser(JSON.parse(sessionStorage.getItem("userdata")))
-    }
-  }, [])
+
   useEffect(() => {
     if (user !== null) {
-      axios.get(process.env.REACT_APP_BACKEND_URL + '/expenses/' + user.id)
+      authAxios.get(process.env.REACT_APP_BACKEND_URL + '/expenses/' + user.id)
       .then(response => response.data)
       .then(ex => {
-        console.log(ex);
-        if (user) console.log("user logged in")
-        else console.log("no user")
         setExpenses(ex);
         });
     }

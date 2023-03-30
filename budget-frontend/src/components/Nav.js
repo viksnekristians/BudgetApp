@@ -3,14 +3,16 @@ import { useState } from 'react';
 import {Link} from 'react-router-dom'
 import AddExpense from './AddExpense'
 import { UserContext } from '../UserContext';
+import axios from 'axios';
 
 function Nav() {
   const {user, setUser} = useContext(UserContext)
   const [showAddExpense, setShowAddExpense] = useState(false);
   const handleLogout = (e) => {
     e.preventDefault();
-    sessionStorage.clear();
+    localStorage.clear();
     setUser(null);
+    axios.get(process.env.REACT_APP_BACKEND_URL + '/logout', { withCredentials: true})
   }
  
   return (

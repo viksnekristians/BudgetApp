@@ -14,7 +14,7 @@ function AllExpenses() {
   var currentExpenses = expenses.filter(e =>  
     (new Date(e.createdAt).getTime() <= (new Date(endDate).getTime() + 60 * 60 * 24 * 1000)) && (Date.parse(new Date(e.createdAt)) >= Date.parse(new Date(startDate)))
   )
-  const {user, setUser} = useContext(UserContext);
+
   const categories = [...new Set(currentExpenses.map(expense => expense.category))]
   const [selectedCategories, setSelectedCategories] = useState([]);
 
@@ -33,7 +33,7 @@ function AllExpenses() {
     setSelectedCategories(selectedCategories.filter(sc => {
       return categories.includes(sc)
     }))
-  }, [categories])
+  }, [expenses])
 
   return (
     <div className="container-sm pt-5">   
@@ -43,11 +43,11 @@ function AllExpenses() {
         <div className="date-pickers-container d-flex flex-row justify-content-between w-50 mx-auto w-100-tablet mb-5">
           <div className="date-picker">
             <p className="select-date-text">Select start date:</p>
-            <DatePicker onChange={setStartDate} value={startDate}/>
+            <DatePicker onChange={setStartDate} value={startDate} maxDate={new Date(endDate)}/>
           </div>
           <div className="date-picker">
             <p className="select-date-text">Select end date:</p>
-            <DatePicker onChange={setEndDate} value={endDate} />
+            <DatePicker onChange={setEndDate} value={endDate} minDate={new Date(startDate)}/>
           </div>
         </div>
         
