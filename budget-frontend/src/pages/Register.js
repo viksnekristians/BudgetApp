@@ -3,6 +3,7 @@ import { UserContext } from '../UserContext';
 import { ExpensesContext } from '../ExpensesContext';
 import {BrowserRouter as Router, Switch, Route, Routes, Link, Navigate} from 'react-router-dom'
 import axios from 'axios';
+import authAxios from '../api/authAxios';
 
 function Register() {
 const {user,setUser} = useContext(UserContext);
@@ -10,6 +11,7 @@ const [firstname, setFirstname] = useState("")
 const [lastname, setLastname] = useState("")
 const [username, setUsername] = useState("")
 const [password, setPassword] = useState("")
+const {expenses, setExpenses} = useContext(ExpensesContext);
 
 if (user) {
     return <Navigate to="/" replace />;
@@ -26,24 +28,39 @@ if (user) {
     .then(response => response.data)
     .then(user => {
         if (!user) console.log("no user")
-        else {
-          setUser({
-              id: user._id,
-              firstname: user.firstname,
-              lastname: user.lastname,
-              username: user.username
-          })
-          sessionStorage.setItem("isLoggedIn", true);
-          sessionStorage.setItem("userdata", JSON.stringify({
-              id: user._id,
-              firstname: user.firstname,
-              lastname: user.lastname,
-              username: user.username
-          }));
+        else { 
+            axios.post(process.env.REACT_APP_BACKEND_URL + '/login', {
+                username: username,
+                password: password
+            }, { withCredentials: true})
+            .then(response => response.data)
+            .then(data => {
+              const foundUser = data.user;
+              const accessToken = data.accessToken;
+              if (!foundUser) console.log("no user")
+              else {
+                setUser(foundUser);
+                localStorage.setItem("isLoggedIn", true);
+                localStorage.setItem("token", accessToken);
+                localStorage.setItem("userdata", JSON.stringify(foundUser));
+                /*const authAxios = axios.create({
+                    baseURL: process.env.REACT_APP_BACKEND_URL,
+                    headers: {
+                        Authorization: authHeader()
+                    }
+                });*/
+                
+                authAxios.get(process.env.REACT_APP_BACKEND_URL + '/expenses/' + foundUser.id)
+                .then(response => response.data)
+                .then(ex => {
+                    setExpenses(ex);
+                    });
+              }
+              });
         }
         })
     .catch(err => {
-        if(err.response.status === 409) console.log("jau ir sads lietotajvards")
+        if(err.response.status === 409) console.log("username exists")
     })
 
   }
