@@ -5,28 +5,27 @@ const { Expense } = require("../Models/expense");
 const addExpense = (req, res) => {
 
     const expense = new Expense({title: req.body.title, category: req.body.category, description: req.body.desc, amount: Number(req.body.amount), userID: req.body.userID});
-    expense.save(function (err) {
+    expense.save().then((err) => {
       if (err) return console.log("error saving expense");
     });
     res.send(expense);
-    console.log(process.env.ACCESS_TOKEN_SECRET)
-
   }
 
 const getExpenses = (req, res) => {
-  Expense.find({userID: req.params.id}, function (err, expenses) {
-    if (err) {
-      console.log("error");
-      return;
-    }
+  Expense.find({userID: req.params.id}).sort({ createdAt : -1}).then((expenses) => {
     res.json(expenses);
-  }).sort({createdAt: -1});
+  },
+  (error) => {
+    console.error(error); // Error!
+  });
 }
 
 const deleteExpense = (req, res) => {
-  Expense.deleteOne({ _id: req.params.id }, function (err) {
-    if (err) console.log("error deleting")
-    // deleted at most one tank document
+  Expense.deleteOne({ _id: req.params.id }).then((deleted) => {
+    res.status(200);
+  },
+  (err) => {
+    console.log("error deleting");
   });
   }
 
