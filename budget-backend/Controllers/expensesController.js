@@ -5,10 +5,9 @@ const { Expense } = require("../Models/expense");
 const addExpense = (req, res) => {
 
     const expense = new Expense({title: req.body.title, category: req.body.category, description: req.body.desc, amount: Number(req.body.amount), userID: req.body.userID});
-    expense.save().then((err) => {
-      if (err) return console.log("error saving expense");
+    expense.save().then((exp) => {
+      res.send(expense);
     });
-    res.send(expense);
   }
 
 const getExpenses = (req, res) => {
